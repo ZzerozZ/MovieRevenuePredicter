@@ -74,13 +74,31 @@ def get_movie_info(driver, url, num_actor=-1):
 
 
 if __name__ == '__main__':
-    driver = webdriver.Chrome(chrome_options=CHROME_OPTION)
+    print ('Start crawling...')
+    driver = webdriver.Chrome()
 
     movies = pd.read_csv('movie.txt', header=None).values.ravel()
 
-    for movie in movies:
-        movie_info = get_movie_info(driver, movie, num_actor=5)
-        with open('Data/%s.dict'%movie, 'w') as f:
-            f.write(movie_info)
+    round = 1
 
-    time.sleep(np.random.randint(1,4))
+    for movie in movies:
+        try:
+            movie_info = get_movie_info(driver, movie, num_actor=5)
+            with open('Data/%s.dict'%movie[41:-4], 'w') as f:
+                f.write(str(movie_info))
+
+            time.sleep(np.random.randint(1,4))
+
+            # Reset driver:
+            if round % 100 == 0:
+                driver.close()
+                del driver
+                time.sleep(60)            
+                driver = webdriver.Chrome()
+
+            round += 1
+        except:
+            with open('exceptions.txt', 'a+') as f_except:
+                f_except.write(movie + '\n')
+
+    print ('Done')
