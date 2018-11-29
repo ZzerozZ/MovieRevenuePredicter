@@ -87,9 +87,9 @@ if __name__ == '__main__':
     print ('Start crawling...')
     driver = webdriver.Chrome(chrome_options=CHROME_OPTION)
 
-    movies = pd.read_csv('movie.txt', header=None).values.ravel()
+    movies = pd.read_csv('movie.txt', header=None).values.ravel()[:10]
 
-    round = 1
+    _round = 1
 
     for movie in movies:
         try:
@@ -100,16 +100,17 @@ if __name__ == '__main__':
             time.sleep(np.random.randint(1,4))
 
             # Reset driver:
-            if round % 100 == 0:
-                print ("Crawling...\t%d/%d\n"%(round, len(movies)))
+            if _round % 100 == 0:
+                print ("Crawling...\t%d/%d\n"%(_round, len(movies)))
                 driver.close()
                 del driver
                 time.sleep(60)            
                 driver = webdriver.Chrome(chrome_options=CHROME_OPTION)
-
-            round += 1
+            _round += 1
         except:
             with open('exceptions.txt', 'a+') as f_except:
                 f_except.write(movie + '\n')
 
+    driver.close()
+    del driver
     print ('Done')
