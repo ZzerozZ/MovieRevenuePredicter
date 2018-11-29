@@ -9,6 +9,8 @@ Created on Wed Nov.28 2018
 
 from conf import *
 
+CHROME_OPTION = webdriver.ChromeOptions()
+CHROME_OPTION.add_argument("headless")
 
 def get_movie_info(driver, url, num_actor=-1):   
     """
@@ -25,34 +27,40 @@ def get_movie_info(driver, url, num_actor=-1):
     -------
     Dictionary of movie info
     Format:  {'name':'',
-         'revenue':'',
-         'release_date':'',
-         'genre':'',
-         'runtime':'',
-         'mpaa_rating':'',
-         'budget':'',
-         'director':'',
-         'writer':'',
-         'actor':'',
+            'domestic':'',
+            'revenue':'',
+            'release_date':'',
+            'genre':'',
+            'runtime':'',
+            'mpaa_rating':'',
+            'budget':'',
+            'director':'',
+            'writer':'',
+            'actor':'',
+            'actor':'',
+            'producer':''
         }
     """
 
     movie = {'name':'',
-         'revenue':'',
-         'release_date':'',
-         'genre':'',
-         'runtime':'',
-         'mpaa_rating':'',
-         'budget':'',
-         'director':'',
-         'writer':'',
-         'actor':'',
+            'domestic':'',
+            'revenue':'',
+            'release_date':'',
+            'genre':'',
+            'runtime':'',
+            'mpaa_rating':'',
+            'budget':'',
+            'director':'',
+            'writer':'',
+            'actor':'',
+            'producer':'',
         }
     # Get URL:
     driver.get(url)
 
     # Get movie info:
     movie['name'] = driver.find_element_by_xpath(XPATHS['name']).text.replace('\n', ' ')
+    movie['domestic'] = driver.find_element_by_xpath(XPATHS['domestic']).text
     movie['revenue'] = driver.find_element_by_xpath(XPATHS['revenue']).text
     movie['release_date'] = driver.find_element_by_xpath(XPATHS['release_date']).text
     movie['genre'] = driver.find_element_by_xpath(XPATHS['genre']).text
@@ -63,6 +71,8 @@ def get_movie_info(driver, url, num_actor=-1):
     movie['director'] = [e.get_attribute('href') for e in driver.find_elements_by_xpath(XPATHS['director'])]
     movie['writer'] = [e.get_attribute('href') for e in driver.find_elements_by_xpath(XPATHS['writer'])]
     movie['actor'] = [e.get_attribute('href') for e in driver.find_elements_by_xpath(XPATHS['actor'])]
+    movie['producer'] = [e.get_attribute('href') for e in driver.find_elements_by_xpath(XPATHS['producer'])]
+    movie['composer'] = driver.find_element_by_xpath(XPATHS['director']).get_attribute('href')
 
     # Filter actors:
     if num_actor > 0 and len(movie['actor']) > num_actor:
@@ -75,7 +85,7 @@ def get_movie_info(driver, url, num_actor=-1):
 
 if __name__ == '__main__':
     print ('Start crawling...')
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options=CHROME_OPTION)
 
     movies = pd.read_csv('movie.txt', header=None).values.ravel()
 
@@ -91,10 +101,11 @@ if __name__ == '__main__':
 
             # Reset driver:
             if round % 100 == 0:
+                print ("Crawling...\t%d/%d\n"%(round, len(movies)))
                 driver.close()
                 del driver
                 time.sleep(60)            
-                driver = webdriver.Chrome()
+                driver = webdriver.Chrome(chrome_options=CHROME_OPTION)
 
             round += 1
         except:
