@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 https://www.boxofficemojo.com/movies/?id=spiderman2017.htm
 https://www.boxofficemojo.com/movies/?id=wolfwarrior2.htm
 https://www.boxofficemojo.com/movies/?id=deadpool2016.htm
@@ -55,3 +56,6 @@ https://www.boxofficemojo.com/movies/?id=moonraker.htm
 https://www.boxofficemojo.com/movies/?id=mebeforeyou.htm
 https://www.boxofficemojo.com/movies/?id=junglebook.htm
 https://www.boxofficemojo.com/movies/?id=journeytothewest.htm
+=======
+
+>>>>>>> 7482193e942dc73f509ca990896ecf402d2f6a3c
