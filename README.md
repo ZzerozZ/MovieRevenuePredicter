@@ -1,4 +1,6 @@
-# MovieRevenuePredicter
+# Movie Revenue Predicter
+
+### Predict revenue of the movie
 
 Final project of Data Science class
 
