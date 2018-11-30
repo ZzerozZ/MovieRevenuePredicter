@@ -115,3 +115,15 @@ if __name__ == '__main__':
     driver.close()
     del driver
     print ('Done')
+
+
+# Load json:
+# import json
+
+# columns = ['name', 'runtime', 'release_date', 'mpaa_rating', 'genre', 'budget', 'actor', 'composer', 'director', 'producer', 'writer', 'domestic', 'revenue']
+
+# with open('/bigdata/dns/data-parse/output/nghiadt/DNS/data/avatar.json', 'r') as fp:
+#     data = json.load(fp)
+    
+# df = pd.DataFrame.from_dict([data])
+# df = df[columns]
