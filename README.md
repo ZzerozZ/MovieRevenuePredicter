@@ -35,7 +35,7 @@ ____________________________________
 
 ## Crawler
 ____________________________________
-As you see, in this project, we used *selenium* to collect data. You also use any tool else, but find an element by **xpath** is more easier than try to make things right with *beautifulsoup* or *scrapy* as well.
+As you see, in this project, we used *selenium* to collect data. You can use any tool else also, but find an element by **xpath** is more easier than try to make things right with *beautifulsoup* or *scrapy* as well.
 
 An example, with each movie, we need to collect 13 features, it's just 13 lines with selenium but with beautifulsoup, 13 lines help you collect about 5 features.
 
