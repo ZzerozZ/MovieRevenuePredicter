@@ -16,6 +16,23 @@ We use python-selenium to collect data from [boxofficemojo](https://www.boxoffic
 
 Our predict model will be comming soon.
 
+
+## Project architecture
+____________________________________
+  ### Python scripts:
+  - **lib.py**: common library
+  - **xpath.py**: *xpath* strings
+  - **Run_crawl.ipynb**: Run crawler
+  ### Classes
+  - **Chrome_Crawler**: a google chrome driver
+  - **Genre_Crawler**: *Chrome_Crawler*'s child, use to crawl list of movie id
+  - **Movie_Crawler**: *Chrome_Crawler*'s child, use to crawl informations of movie
+  - **...**
+  ### Text files:
+  - **movies.txt**: list of movie's url
+  - **exception.txt**: list of failed-crawl url
+
+
 ## Crawler
 ____________________________________
 As you see, in this project, we used *selenium* to collect data. You also use any tool else, but find an element by **xpath** is more easier than try to make things right with *beautifulsoup* or *scrapy* as well.
