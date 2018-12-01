@@ -10,7 +10,7 @@ Members:
 
 ## Summary
 ____________________________________
-In this project, we try to using a regression Machine Learning model to predict the revenue of movie with its information.
+In this project, we try to use a regression model to predict revenue of movie with its information.
 
 We use python-selenium to collect data from [boxofficemojo](https://www.boxofficemojo.com/)'s reports and use these data as input data. 
 
@@ -41,4 +41,5 @@ An example, with each movie, we need to collect 13 features, it's just 13 lines 
 
 ## Regression model
 ____________________________________
-Incoming...
+
+
