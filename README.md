@@ -19,7 +19,7 @@ Our predict model will be comming soon.
 
 ## Project architecture
 ____________________________________
-  ### Python scripts:
+  ### Python scripts
   - **lib.py**: common library
   - **xpath.py**: *xpath* strings
   - **Run_crawl.ipynb**: Run crawler
@@ -28,7 +28,7 @@ ____________________________________
   - **Genre_Crawler**: *Chrome_Crawler*'s child, use to crawl list of movie id
   - **Movie_Crawler**: *Chrome_Crawler*'s child, use to crawl informations of movie
   - **...**
-  ### Text files:
+  ### Text files
   - **movies.txt**: list of movie's url
   - **exception.txt**: list of failed-crawl url
 
