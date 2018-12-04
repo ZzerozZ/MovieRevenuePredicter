@@ -23,7 +23,8 @@ MOVIE_XPATH = {
     'writer'      :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[2]/font/a',
     'actor'       :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[2]/table[1]/tbody[1]/tr[3]/td[2]/font[1]/a',
     'producer'    :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[2]/table[1]/tbody[1]/tr[4]/td[2]/font[1]/a',
-    'composer'    :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[2]/table[1]/tbody[1]/tr[5]/td[2]/font[1]'
+    'composer'    :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[2]/table[1]/tbody[1]/tr[5]/td[2]/font[1]',
+    'lastseen'  :'/html[1]/body[1]/div[1]/div[3]/div[2]/table[2]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/table[1]/tbody[1]/tr[1]/td[1]/center[1]/table[1]/tbody[1]/tr[1]/td[1]/font[1]/font[1]'
 }
 
 GENRE_XPATH = {

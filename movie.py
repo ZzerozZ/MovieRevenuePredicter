@@ -51,7 +51,8 @@ class Movie_Crawler(Chrome_Crawler):
                 'writer':'',
                 'actor':'',
                 'actor':'',
-                'producer':''
+                'producer':'',
+                'lastseen':''
             }
         """
 
@@ -69,6 +70,7 @@ class Movie_Crawler(Chrome_Crawler):
                 'writer':'',
                 'actor':'',
                 'producer':'',
+                'lastseen':''
             }
         # Get URL:
         url = MOVIE%movie_id
@@ -76,9 +78,9 @@ class Movie_Crawler(Chrome_Crawler):
 
         # Just crawl closed movie:
         try:
-            self.driver.find_element_by_xpath("//td[contains(text(),'Close Date:')]").text
+            movie['lastseen'] = self.driver.find_element_by_xpath(MOVIE_XPATH['lastseen']).text.replace('Domestic Total as of ', '')
         except:
-            return None
+            movie['lastseen'] = '-'
 
         movie['id']           = movie_id
         movie['name']         = self.driver.find_element_by_xpath(MOVIE_XPATH['name']).text.replace('\n', ' ')
