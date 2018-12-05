@@ -74,29 +74,24 @@ class Movie_Crawler(Chrome_Crawler):
             }
         # Get URL:
         url = MOVIE%movie_id
+        movie['id'] = movie_id
         self.driver.get(url)
 
-        # Just crawl closed movie:
-        try:
-            movie['lastseen'] = self.driver.find_element_by_xpath(MOVIE_XPATH['lastseen']).text.replace('Domestic Total as of ', '')
-        except:
-            movie['lastseen'] = '-'
-
-        movie['id']           = movie_id
-        movie['name']         = self.driver.find_element_by_xpath(MOVIE_XPATH['name']).text.replace('\n', ' ')
-        movie['domestic']     = self.driver.find_element_by_xpath(MOVIE_XPATH['domestic']).text
-        movie['revenue']      = self.driver.find_element_by_xpath(MOVIE_XPATH['revenue']).text
-        movie['release_date'] = self.driver.find_element_by_xpath(MOVIE_XPATH['release_date']).text
-        movie['genre']        = self.driver.find_element_by_xpath(MOVIE_XPATH['genre']).text
-        movie['runtime']      = self.driver.find_element_by_xpath(MOVIE_XPATH['runtime']).text
-        movie['mpaa_rating']  = self.driver.find_element_by_xpath(MOVIE_XPATH['mpaa_rating']).text
-        movie['budget']       = self.driver.find_element_by_xpath(MOVIE_XPATH['budget']).text
-        movie['composer']     = self.driver.find_element_by_xpath(MOVIE_XPATH['director']).get_attribute('href')
+        multival_feats = ['director', 'writer', 'actor', 'producer']
+        for feature in np.setdiff1d(list(MOVIE_XPATH.keys()), multival_feats):
+            try:
+                if feature != 'composer':
+                    movie[feature] = self.driver.find_element_by_xpath(MOVIE_XPATH[feature]).text
+                else:
+                    movie['composer'] = self.driver.find_element_by_xpath(MOVIE_XPATH['composer']).get_attribute('href')
+            except:
+                movie[feature] = '-'
         
-        movie['director']     = [e.get_attribute('href') for e in self.driver.find_elements_by_xpath(MOVIE_XPATH['director'])]
-        movie['writer']       = [e.get_attribute('href') for e in self.driver.find_elements_by_xpath(MOVIE_XPATH['writer'])]
-        movie['actor']        = [e.get_attribute('href') for e in self.driver.find_elements_by_xpath(MOVIE_XPATH['actor'])]
-        movie['producer']     = [e.get_attribute('href') for e in self.driver.find_elements_by_xpath(MOVIE_XPATH['producer'])]
+        for feature in multival_feats:
+            try:
+                movie[feature] = [e.get_attribute('href') for e in self.driver.find_elements_by_xpath(MOVIE_XPATH[feature])]
+            except:
+                movie[feature] = []
 
         # Filter actors:
         if num_actor > 0 and len(movie['actor']) > num_actor:
