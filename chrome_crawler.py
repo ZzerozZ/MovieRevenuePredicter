@@ -7,7 +7,8 @@ Created on Wed Dec.01 2018
 """
 
 from xpath import *
-
+from lib import *
+from selenium import webdriver
 
 GENRE = 'https://www.boxofficemojo.com/genres/chart/?view=main&pagenum=%d&id=%s.htm'
 

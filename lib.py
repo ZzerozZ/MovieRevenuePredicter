@@ -5,7 +5,6 @@ Created on Mon Sep.17 2018
 
 @author: nghiadt 
 """
-
 import os
 import gc
 import re
@@ -13,23 +12,17 @@ import csv
 import json
 import time
 import pickle
-# import resource
-# import threading
 # import itertools
-# import subprocess
 import numpy as np
 import pandas as pd
-# from os import walk
 # import seaborn as sns
-# import networkx as nx
-# from lxml import html
 # from statistics import mode
 # import lightgbm as lgb
 # import catboost as cbt
 # import xgboost as xgb
 from selenium import webdriver
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import multiprocessing as mp
 # import urllib.request as urllib
 import matplotlib.pyplot as plt

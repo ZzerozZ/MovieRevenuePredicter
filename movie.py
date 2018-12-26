@@ -9,8 +9,8 @@ Created on Wed Dec.01 2018
 from xpath import *
 from chrome_crawler import Chrome_Crawler
 
-CHROME_OPTION = webdriver.ChromeOptions()
-CHROME_OPTION.add_argument("headless")
+# CHROME_OPTION = webdriver.ChromeOptions()
+# CHROME_OPTION.add_argument("headless")
 
 MOVIE = 'https://www.boxofficemojo.com/movies/?id=%s.htm'
 

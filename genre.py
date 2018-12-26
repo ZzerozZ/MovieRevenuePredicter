@@ -9,8 +9,8 @@ Created on Wed Dec.01 2018
 from xpath import *
 from chrome_crawler import Chrome_Crawler
 
-CHROME_OPTION = webdriver.ChromeOptions()
-CHROME_OPTION.add_argument("headless")
+# CHROME_OPTION = webdriver.ChromeOptions()
+# CHROME_OPTION.add_argument("headless")
 
 GENRE = 'https://www.boxofficemojo.com/genres/chart/?view=main&pagenum=%d&id=%s.htm'
 
