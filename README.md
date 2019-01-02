@@ -42,5 +42,46 @@ An example, with each movie, we need to collect 13 features, it's just 13 lines 
 ## Regression model
 ____________________________________
 
+### Features (64):
 
+#### 1. From raw data:
 
+##### a. Raw features (4):
+- **budget**: budget money
+- **genre**: movie's genre
+- **mppa_rating**: MPAA rating
+- **runtime**: long time of movie
+
+##### b. Parse from rawdata (7):
+- **month**: release month
+- **season**: Season in year
+- **movie_season**: season in movie serie
+- **num_actor**: number of crawled-actor in this movie
+- **num_composer**: number of crawled-composer in this movie
+- **num_producer**: number of crawled-producer in this movie
+- **num_writer**: number of crawled-writer in this movie
+
+#### 2. From studio + actor/producer/...:
+
+##### a. Studio stats (7):
+- **num_film**: number of above movies
+- **years**: #year from first movie
+- **min**: min revenue of above movies
+- **max**: max revenue of above movies
+- **std**: standard revenue of above movies
+- **mean**: avg. revenue of above movies
+- **med**: median revenue of above movies
+
+##### b. People stats (42):
+- **num_film**: number of above movies
+- **years**: #year from first movie
+- 5 stats features of each information (5*8):
+	- **gross**: gross revenue
+	- **gross_last3**: gross revenue of last 3 movies
+	- **gross_last5**: gross revenue of last 5 movies
+	- **gross_top3**: gross revenue of top 3 movies (sorted by revenue)
+	
+	- **opening**: opening revenue
+	- **opening_last3**: opening revenue of last 3 movies
+	- **opening_last5**: opening revenue of last 5 movies
+	- **opening_top3**: opening revenue of top 3 movies (sorted by revenue)
