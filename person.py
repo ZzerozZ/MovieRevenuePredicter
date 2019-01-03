@@ -30,7 +30,7 @@ class Person_Crawler(Chrome_Crawler):
 
     def get_list_person(self):
         # Get json movie list from folder Movies
-        listMovies = os.listdir('C:\\Users\Dell\Desktop\DataScience\MovieRevenuePredicter\Movies')
+        listMovies = os.listdir('Movies')
         listPeople = []
 
         for movie in listMovies:
@@ -39,15 +39,19 @@ class Person_Crawler(Chrome_Crawler):
                 break
             
             # Create link of movie
-            url = 'C:\\Users\Dell\Desktop\DataScience\MovieRevenuePredicter\Movies\\%s' % movie
+            url = 'Movies\\%s' % movie
             # Get movie information
             movieInfo = json.load(open(url, 'r'))
             # Get list persons from movieInfo
-            listPeople += movieInfo['director'] + movieInfo['writer'] + movieInfo['actor'] + movieInfo['producer']
+            listPeople += movieInfo['director'] + movieInfo['writer'] + movieInfo['actor'] + movieInfo['producer'] + movieInfo['composer']
 
         # Remove duplicated values
         people = np.unique(listPeople)
         return people
+
+   
+
+
     
     # def get_person_info(self, url):
         
