@@ -1,10 +1,11 @@
 #!/opt/anaconda2/envs/ py35
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep.17 2018
+Created on Dec.20 2018
 
 @author: nghiadt 
 """
+
 import os
 import gc
 import re
@@ -15,20 +16,21 @@ import pickle
 # import itertools
 import numpy as np
 import pandas as pd
+from re import sub
+from decimal import Decimal
 # import seaborn as sns
 # from statistics import mode
-# import lightgbm as lgb
-# import catboost as cbt
-# import xgboost as xgb
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-import multiprocessing as mp
-# import urllib.request as urllib
+import lightgbm as lgb
+import catboost as cbt
 import matplotlib.pyplot as plt
 # from sklearn.metrics import confusion_matrix
-# from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from datetime import datetime, timedelta, date, timezone
+
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten, Activation
+from keras.optimizers import SGD, Adam
 
 
 def save_obj(obj, file_path):
