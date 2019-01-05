@@ -29,7 +29,7 @@ def money_str2float(s):
     
   _____
   Notes:
-    Return None if input time is 'N/A' or '-'
+    Return None if input is 'N/A' or '-'
   """
   if s == '-' or s == 'N/A':
     return None
@@ -68,7 +68,7 @@ def time_str2mins(t):
     
   _____
   Notes:
-    Return None if input time is 'N/A'
+    Return None if input is 'N/A'
   """
   if t == 'N/A':
     return None
@@ -145,20 +145,21 @@ def str2date(s):
         - input must have a year string!
     """
     date_str = s.split('/')
-    
-    if len(date_str) == 3:
-        year = 2000 + int(date_str[-1])
-        if year > 2018: year -= 100
+    try:
+        if len(date_str) == 3:
+            year = 2000 + int(date_str[-1])
+            if year > 2018: year -= 100
 
-        month = int(date_str[0])
-        day = int(date_str[1])
-    else:
-        year = int(re.findall(r'[\d]+', s)[0])
-        month = 6
-        day = 1
-    
-    return date(year,month,day)
-
+            month = int(date_str[0])
+            day = int(date_str[1])
+        else:
+            year = int(re.findall(r'[\d]+', s)[0])
+            month = 6
+            day = 1
+        
+        return date(year,month,day)
+    except:
+        return None
 
 def get_person_info(person_json, to_date):
     """
@@ -190,7 +191,7 @@ def get_person_info(person_json, to_date):
     tmp = tmp[tmp['lifetimeGross'] != '/a']
     tmp = tmp[tmp['opening'] != '/a']
     tmp = tmp[tmp['date'] != 'N/A']
-    tmp['date'] = tmp['date'].apply(str2date)
+    tmp['date'] = tmp['date'].apply(lambda x: str(str2date(x)))
     
     # Remove future movies:
     tmp = tmp[tmp['date'] < to_date]
@@ -204,7 +205,70 @@ def get_person_info(person_json, to_date):
     
     # Get neccessary informations:
     num_film = tmp.shape[0]
-    years = 1 + int(tmp.date.values[0].year) - int(tmp.date.values[-1].year)
+    years = 1 + int(tmp.date.values[0][:4]) - int(tmp.date.values[-1][:4])
+    try:
+        top3 = tmp.sort_values('lifetimeGross', ascending=False).lifetimeGross.values[2]
+    except:
+        top3 = tmp.lifetimeGross.min()
+    
+    gross = []
+    opening = []
+    for df in [tmp, tmp.head(3), tmp.head(5), tmp[tmp.lifetimeGross >= top3]]:
+        gross += [df.lifetimeGross.values.mean(), df.lifetimeGross.values.max(),\
+                df.lifetimeGross.values.min(), np.median(df.lifetimeGross.values),\
+                np.std(df.lifetimeGross.values)]
+        opening += [df.opening.values.mean(), df.opening.values.max(),\
+                df.opening.values.min(), np.median(df.opening.values),\
+                np.std(df.opening.values)]
+        
+    return [num_film, years] + gross + opening
+
+
+def get_studio_info(studio, df_studio, to_date):
+    """
+    Get informations of studio
+    
+    _____
+    Params:
+        - studio: target studio, string
+        - df_studio: DataFrame contains all studios
+        - to_date: datatype is datetime.datetime.Date
+        
+    _____
+    Notes:
+    If no necessary information exist, this function will be returning a None vector
+    """
+    tmp = df_studio[df_studio['studio'] == studio]
+    tmp.date = tmp.date.apply(lambda x: str(x))
+    tmp = tmp[tmp['date'] < to_date]
+    
+    stats = ['avg', 'max', 'min', 'med', 'std']
+    studio_feats = ['num_film', 'years'] + ['gross_' + stat for stat in stats] + \
+                ['gross_last3_' + stat for stat in stats] + \
+                ['gross_last5_' + stat for stat in stats] + \
+                ['gross_top3_' + stat for stat in stats]  +  \
+                                                            \
+                ['opening_' + stat for stat in stats]       + \
+                ['opening_last3_' + stat for stat in stats] + \
+                ['opening_last5_' + stat for stat in stats] + \
+                ['opening_top3_' + stat for stat in stats]
+    
+    # Remove bad data:
+    tmp = tmp[tmp['lifetimeGross'] != '/a']
+    tmp = tmp[tmp['opening'] != '/a']
+    tmp = tmp[tmp['date'] != 'N/A']
+
+    if tmp.empty:
+        return [None]* len(studio_feats)
+    
+    # Cast some columns to float:
+    tmp.lifetimeGross = tmp.lifetimeGross.astype('float')
+    tmp.opening = tmp.opening.astype('float')
+    tmp = tmp.sort_values('date', ascending=False)
+    
+    # Get neccessary informations:
+    num_film = tmp.shape[0]
+    years = 1 + int(tmp.date.values[0][:4]) - int(tmp.date.values[-1][:4])
     try:
         top3 = tmp.sort_values('lifetimeGross', ascending=False).lifetimeGross.values[2]
     except:
